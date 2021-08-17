@@ -38,9 +38,17 @@ jobs:
           CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
           echo "::set-output name=changelog::$CHANGELOG"
         
-      - name: Microsoft Teams Notification
-        uses: skitionek/notify-microsoft-teams@master
-        if: always()
+      #- name: Microsoft Teams Notification
+      #  uses: skitionek/notify-microsoft-teams@master
+      #  if: always()
+      #  with:
+      #    webhook_url: ${{ secrets.MSTEAMS_WEBHOOK }}
+      #    overwrite: "{title: \"New release of CoucouApp\", text: \"${{ steps.changelog_string.outputs.changelog }}\"}"
+      
+      - name: Send a changelog to Microsoft Teams
+        uses: aliencube/microsoft-teams-actions@v0.8.0
         with:
-          webhook_url: ${{ secrets.MSTEAMS_WEBHOOK }}
-          overwrite: "{title: \"New release of CoucouApp\", text: \"${{ steps.changelog_string.outputs.changelog }}\"}"
+          webhook_uri: ${{ secrets.MSTEAMS_WEBHOOK }}
+          title: "New release of CoucouApp"
+          summary: "Generated changelog for new CoucouApp release"
+          text: "${{ steps.changelog_string.outputs.changelog }}"
