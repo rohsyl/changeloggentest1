@@ -24,6 +24,7 @@ jobs:
       # Generate changelog
       - name: Generate changelog
         uses: heinrichreimer/action-github-changelog-generator@v2.2
+        id: changelog_generate
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           
@@ -36,6 +37,7 @@ jobs:
             {
               "@type": "MessageCard",
               "@context": "http://schema.org/extensions",
-              "title": "New release of CoucouApp"
+              "title": "New release of CoucouApp",
+              "text": ${{ steps.changelog_generate.outputs.changelog }}
             }
 
