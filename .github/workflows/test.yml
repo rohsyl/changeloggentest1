@@ -28,6 +28,15 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           
+      - name: Prepare changelog
+        id: changelog_string
+        run: |
+          export CHANGELOG="${{ steps.changelog_generate.outputs.changelog }}"
+          CHANGELOG="${CHANGELOG//'%'/'%25'}"
+          CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
+          CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
+          echo "::set-output name=changelog::$CHANGELOG"
+        
       - name: Microsoft Teams Notification
         uses: skitionek/notify-microsoft-teams@master
         if: always()
@@ -38,6 +47,6 @@ jobs:
               "@type": "MessageCard",
               "@context": "http://schema.org/extensions",
               "title": "New release of CoucouApp",
-              "text": "${{ steps.changelog_generate.outputs.changelog }}"
+              "text": "${{ steps.changelog_string.outputs.changelog }}"
             }
 
