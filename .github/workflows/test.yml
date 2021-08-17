@@ -38,6 +38,6 @@ jobs:
               "@type": "MessageCard",
               "@context": "http://schema.org/extensions",
               "title": "New release of CoucouApp",
-              "text": ${{ steps.changelog_generate.outputs.changelog }}
+              "text": "${{ steps.changelog_generate.outputs.changelog }}"
             }
 
