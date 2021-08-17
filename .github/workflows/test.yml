@@ -27,7 +27,7 @@ jobs:
         id: changelog_generate
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          configureSections: "{\"feature\":{\"prefix\":\"**New features:**\",\"labels\":[\"feature\",\"Feature\"]},\"maintenance\":{\"prefix\":\"**Maintenance:**\",\"labels\":[\"maintenance\"]},\"hotfix\":{\"prefix\":\"**Documentation updates:**\",\"labels\":[\"hotfix\",\"bug\",\"Bug\"]},\"wontfix\":{\"prefix\":\"**Won't fix:**\",\"labels\":[\"wontfix\"]}}"
+          configureSections: "{feature:{prefix:`**New features:**`,labels:[`feature`,`Feature`]},maintenance:{prefix:`**Maintenance:**`,labels:[`maintenance`]},hotfix:{prefix:`**Documentation updates:**`,labels:[`hotfix`,`bug`,`Bug`]},wontfix:{prefix:`**Won't fix:**`,labels:[`wontfix`]}}"
           unreleased: false
           stripGeneratorNotice: true
           onlyLastTag: true
