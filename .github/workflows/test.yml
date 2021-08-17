@@ -27,6 +27,7 @@ jobs:
         id: changelog_generate
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          stripGeneratorNotice: true
           
       - name: Prepare changelog
         id: changelog_string
