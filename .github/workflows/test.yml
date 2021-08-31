@@ -27,7 +27,7 @@ jobs:
         id: changelog_generate
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          #configureSections: "{feature:{prefix:`**New features:**`,labels:[`feature`,`Feature`]},maintenance:{prefix:`**Maintenance:**`,labels:[`maintenance`]},hotfix:{prefix:`**Documentation updates:**`,labels:[`hotfix`,`bug`,`Bug`]},wontfix:{prefix:`**Won't fix:**`,labels:[`wontfix`]}}"
+          configureSections: "{feature:{prefix:`**New features:**`,labels:[`feature`,`Feature`]},maintenance:{prefix:`**Maintenance:**`,labels:[`maintenance`]},hotfix:{prefix:`**Documentation updates:**`,labels:[`hotfix`,`bug`,`Bug`]},wontfix:{prefix:`**Won't fix:**`,labels:[`wontfix`]}}"
           unreleased: false
           stripGeneratorNotice: true
           onlyLastTag: true
@@ -40,15 +40,8 @@ jobs:
           CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
           CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
           echo "::set-output name=changelog::$CHANGELOG"
-        
-      #- name: Microsoft Teams Notification
-      #  uses: skitionek/notify-microsoft-teams@master
-      #  if: always()
-      #  with:
-      #    webhook_url: ${{ secrets.MSTEAMS_WEBHOOK }}
-      #    overwrite: "{title: \"New release of CoucouApp\", text: \"${{ steps.changelog_string.outputs.changelog }}\"}"
       
-      - name: Send a changelog to Microsoft Teams
+      - name: Send changelog to Microsoft Teams
         uses: aliencube/microsoft-teams-actions@v0.8.0
         with:
           webhook_uri: ${{ secrets.MSTEAMS_WEBHOOK }}
