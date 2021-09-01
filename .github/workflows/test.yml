@@ -21,6 +21,12 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     
+      # Checkout code
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:      
+          fetch-depth: 0
+          
       # Generate changelog
       - name: Generate changelog
         uses: heinrichreimer/action-github-changelog-generator@v2.2
