@@ -32,6 +32,7 @@ jobs:
           unreleased: false
           stripGeneratorNotice: true
           onlyLastTag: true
+          verbose: true
           
       - name: Prepare changelog
         id: changelog_string
